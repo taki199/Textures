@@ -9,6 +9,10 @@ const gui = new dat.GUI()
 //texture
 
 const textureLoader = new THREE.TextureLoader();
+const cubeTextureLoader = new THREE.CubeTextureLoader();
+
+
+
 const doorColorTexture = textureLoader.load('/textures/door/color.jpg')
 const doorAmbientOcclusionTexture = textureLoader.load('/textures/door/ambientOcclusion.jpg')
 const doorHeightTexture = textureLoader.load('/textures/door/height.jpg')
@@ -18,6 +22,18 @@ const doorRoughTexture = textureLoader.load('/textures/door/roughness.jpg')
 const matcapTexture=textureLoader.load('/textures/matcaps/1.png')
 const gradientTexture=textureLoader.load('/textures/gradients/3.jpg')
 const doorAlphaTexture=textureLoader.load('/textures/door/alpha.jpg')
+
+
+
+const environmentMapTexture=cubeTextureLoader.load([
+    '/textures/environmentMaps/0/px.jpg',
+    '/textures/environmentMaps/0/nx.jpg',
+    '/textures/environmentMaps/0/py.jpg',
+    '/textures/environmentMaps/0/ny.jpg',
+    '/textures/environmentMaps/0/pz.jpg',
+    '/textures/environmentMaps/0/nz.jpg'
+]) 
+
 /**
  * Base
  */
@@ -60,7 +76,7 @@ const scene = new THREE.Scene()
 const material=new THREE.MeshStandardMaterial()
 material.metalness=0.7
 material.roughness=0.2
-
+material.envMap=environmentMapTexture
 
 gui.add(material,'metalness').min(0).max(1).step(0.0001)
 gui.add(material,'roughness').min(0).max(1).step(0.0001)
